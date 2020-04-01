@@ -9,7 +9,9 @@
 
 **What is supervised machine learning? 👶**
 
-A case when we have both features (the matrix X) and the labels (the vector y)
+A case when we have both features (the matrix X) and the labels (the vector y). 
+
+In more detail: Supervised learning is where you are trying to predict the values of some response variable for various values of the predictor variables (the *features*). For supervised learning to be possible, you need to be able to train your model on data for which you know the values of the response variable already. After doing that, you use your model to predict the values of the response variable for values of the predictors that your model hasn't seen yet. 
 
 ## Linear regression
 
@@ -43,17 +45,31 @@ Multiple linear regression:
 y = B0 + B1*x1 + ... + Bn * xN
 ```
 
+Linear regression assumes four things: 
+
+1. That the response variable is a linear combination of the predictors
+2. That the distribution of the errors is normal
+3. The errors are homoskedastic w.r.t. both the response variable and the predictors
+4. The errors are statistically independent of each other
+
+
 <br/>
 
 **What’s the normal distribution? Why do we care about it? 👶**
 
-Answer here
+The normal distribution is a continuous distribution given by 
+
+$$\ f(x) =  \frac 1{\sigma\sqrt{2\pi}}{e^{-\frac{{(x-\mu)^2}}{2{\sigma^2}}}} $$
+
+Many phenomena in nature, such as human heights, follow this distribution. The Central Limit Theorem says that for any parameter you are trying to estimate by taking samples, as the number of samples approaches infinity, the distribution will approach the normal distribution, with mean identical to the true mean value of the parameter. 
 
 <br/>
 
 **How do we check if a variable follows the normal distribution? ‍⭐️**
 
-Answer here
+A quick-and-dirty test is a q-q plot. Figure out what the quantiles of the variable should be if it follows a normal distribution. Then generate a quantile-by-quantile plot, plotting these quantiles against the observed ones. If the plot is similar to the line y = x then that is a good indicator that the variable follows the normal distribution. 
+
+A more rigorous test is the Shapiro-Wilk test. With a threshold of 0.05, if the p-value is less than 0.05 then we can conclude that the sample does not come from a normal distribution; otherwise it does. 
 
 <br/>
 
@@ -63,7 +79,7 @@ Answer here
 
 <br/>
 
-**What are the methods for solving linear regression do you know? ‍⭐️**
+**What methods for solving linear regression do you know? ‍⭐️**
 
 Answer here
 
@@ -71,30 +87,37 @@ Answer here
 
 **What is gradient descent? How does it work? ‍⭐️**
 
-Answer here
+When we're training a model, we have some loss function that we want to minimize. When we make a mistake, we want to then make each parameter better so that, if presented with the same training example again, we'd do better. So we take the partial derivative of the loss function w.r.t. each parameter, consider the vector of those partial derivatives (the gradient), then simultaneously update each parameter in the steepest negative direction of the gradient. How much do you update these parameters? ("step size") That is specified by the learning rate parameter. 
+
+With a momentum-based optimizer, you check the steepness of the gradient and let the learning rate depend on that. If it's really steep you take a big step; if shallow then a small step. 
 
 <br/>
 
 **What is the normal equation? ‍⭐️**
 
-Normal equations are equations obtained by setting equal to zero the partial derivatives of the sum of squared errors (least squares); normal equations allow one to estimate the parameters of a multiple linear regression.
+The normal equation is an analytic approach to solving linear regression. It is computationally expensive because you have to invert a very large matrix.
+
+Normal equations are obtained by setting equal to zero the partial derivatives of the sum of squared errors (least squares); normal equations allow one to estimate the parameters of a multiple linear regression.
 
 <br/>
 
 **What is SGD  —  stochastic gradient descent? What’s the difference with the usual gradient descent? ‍⭐️**
 
-Answer here
+In stochastic gradient descent, you pick random examples and use that to update your weights. Stochastic GD can be noisy because you could step in the wrong direction; you're only taking a few examples at a time to update your weights. In batch gradient descent you update with all the data you have. You go linearly through the dataset and train on one example at a time. Mini-batch is a middle ground
 
 <br/>
 
 **Which metrics for evaluating regression models do you know? 👶**
 
 The mean square error, root mean square error, median absolute deviation, normalized median absolute deviation, etc.
+
+Residual plots are a good way of seeing whether or not your model is homoskedastic. 
+
 <br/>
 
 **What are MSE and RMSE? 👶**
 
-Answer here
+MSE is the mean squared error-- the mean error of the squared distance between the predicted value of the response variable and the observed value. RMSE is Root Mean Squared Error-- the square root of MSE.
 
 <br/>
 
@@ -286,28 +309,33 @@ Answer here
 
 **What is regularization? Why do we need it? 👶**
 
-Regularization is a tool to help prevent overfitting of our model. It adds a penalty term that increases as model complexity increases.
+Regularization encompasses a broad range of techniques used to penalize or otherwise avoid overfitting when we are training a model. In the simplest cases, it adds a penalty term that increases as model complexity increases.
 <br/>
 
 **Which regularization techniques do you know? ‍⭐️**
 
-L1, L2
+For linear models: L1 (lasso), L2 (ridge), elastic net
+For single trees: cost-complexity pruning
+For ensemble tree methods: sample bagging and feature bagging
+For neural networks: early stopping and dropouts
+
 <br/>
 
 **What kind of regularization techniques are applicable to linear models? ‍⭐️**
 
-Answer here
+L1 (lasso), L2 (ridge), elastic net
 
 <br/>
 
-**How does L2 regularization look like in a linear model? ‍⭐️**
+**What does L2 regularization look like in a linear model? ‍⭐️**
 
 L2 regularization penalizes the model with the square of the weights
 <br/>
 
 **How do we select the right regularization parameters? 👶**
 
-Cross validation?
+Plot the cross validation RMSE for each value of the parameter, and choose the value right after the elbow. 
+
 <br/>
 
 **What’s the effect of L2 regularization on the weights of a linear model? ‍⭐️**
@@ -869,11 +897,22 @@ Answer here
 **What is unsupervised learning? 👶**
 
 Unsupervised learning is when there are no labels attached to the data. You do not know *a priori* which data fall into which groups.
+
+Some examples of unsupervised learning are autoencoders, clustering, topic modeling (LDA), and dimensionality reduction. 
+
+Why are those unsupervised learning? It's because you are trying to find patterns in your data without having an input target. 
+
+In an autoencoder, you convert your data to a vector. You don't need to label your data. 
+
+Topic modeling is also unsupervised, since you don't know the topic for each document. The documents don't have labels. 
+
 <br/>
 
 **What is clustering? When do we need it? 👶**
 
 Clustering is a tool to group like observations together. We need it because grouping like objects together can give us hints as to the label we should assign to that data.
+
+Here's an example. Imagine that you work at Honda. You have craigslist data of car listings from all over the country. There's a strong demand for Honda in Des Moines. Your goal is to find similar markets. So you can use clustering to identify other listings similar to the Des Moines listing. Then you can target the other markets in the same cluster as the Des Moines listing. 
 
 <br/>
 
@@ -892,18 +931,44 @@ See all [this wikipedia page](https://en.wikipedia.org/wiki/Determining_the_numb
 
 **What are the other clustering algorithms do you know? ‍⭐️**
 
-KNN, DBScan, HDBScan, Optics
+KNN, Optics, Hierarchical clustering, DBScan, Hierarchical DBScan (HDBScan), Ward clustering, GMM
+
+In GMM, each point has a probability of belonging in each cluster, rather than flatly assigned to a cluster. 
+
+https://dev.tube/video/dGsxd67IFiU 
+
+https://towardsdatascience.com/gaussian-mixture-modelling-gmm-833c88587c7f 
 <br/>
 
 **Do you know how DBScan works? ‍⭐️**
 
-Answer here
+In DBScan, you define two points: the distance between points, and then number of neighborhood points. Each point has its neighborhood that you base on this distance. Core points are the ones that have a lot of points in their neighborhoods. Each point has its neighborhood-- all pts reachable from it-- within that distance. If your neighborhood is bigger than the threshold then you're a core point. 
+
+Core points that are connected with each other count as in the same cluster. Other points that are reachable from a core point's cluster count as being in that core point's cluster. If your core point is A, and you want to determine whether B is in A's cluster, ask whether A and B are density connected. If there's a point C that's a core point and both A and B are within the threshold distance of C, then assign B to A's cluster. 
+
 
 <br/>
 
 **When would you choose K-means and when DBScan? ‍⭐️**
 
-You can choose K-means when you know how many clusters you want. It is also pretty fast. DBScan doesn't require the number of clusters, but does have other hyperparameters which would need to be tuned.
+You can choose K-means when you know how many clusters you want. It is also pretty fast. But Kmeans only works for data clusters that are circle-ish shaped, since you're choosing clusters based on the distance to the centroid. 
+
+DBScan doesn't require the number of clusters, but does have other hyperparameters which would need to be tuned. DBScan can be used to can find outliers, because it doesn't necessarily assign every point to a cluster. Also, it can deal with weirdly-shaped clusters. E.g., if you have a ball and a ring around it, Kmeans doesn't know what to do with that, but DBScan can tell you. 
+
+<br/>
+
+**How do you make this decision when you can't visualize your data because it's too high dimensional?  ‍⭐️**
+
+If you have an intuition about what your data is like, go to the right algorithm. If not, it's ok to start with a simple algorithm and build up from there. Also: density-based algorithms can get tricked into placing things all into the same cluster, if the data points are connected by dense corridors. (Imagine a barbell with a dense bar.) 
+
+<br/>
+
+## tSNE
+**What is tSNE and how does it work? 
+⭐️**
+
+tSNE is an algorithm that projects higher-dimensional data onto two dimensions in a way that preserves clusters (though not necessarily the orientation of clusters to one another). It is a good way to produce visualizations of clusters in higher-dimensional data.
+
 <br/>
 
 
@@ -921,7 +986,11 @@ PCA
 
 **What’s singular value decomposition? How is it typically used for machine learning? ‍⭐️**
 
-Answer here
+Suppose our data consists of an n x p matrix $$\ X $$. Singular value decomposition rewrites $$\ X $$ as:
+
+$$\ X = UDV^T $$,
+
+where U is an n x p orthogonal matrix ($$\ U^{T}U = I_p), V is a p x p orthogonal matrix, and D is a p x p diagonal matrix whose entries are all >= 0 and are known as the *singular values*. (Note: the columns of UD are called the *principal components* of X.)
 
 <br/>
 
@@ -1011,25 +1080,46 @@ Answer here
 
 **What is collaborative filtering? ‍⭐️**
 
-Answer here
+You have a matrix where users are rows and items that you’re recommending are columns. For every user you have a record of the items they’ve shown interest in. You have this for every user. Collaborative filtering is where for each user, you look at other users who’ve watched the same shows as them, and then look at what they’ve watched. Different users are part of the matrix, but you have different holes. Predict what rating I would give to this movie, based on your similarity to other users who did watch the movie. 
+
+The algorithm is matrix factorization. Singular value decomposition? 
+
+
+https://en.wikipedia.org/wiki/Collaborative_filtering   
+
+Could instead have an item-feature matrix (Pandora example): rows are items, columns are properties of items. 
+
+Look up Netflix recommender system. 
 
 <br/>
 
 **How we can incorporate implicit feedback (clicks, etc) into our recommender systems? ‍⭐️**
 
-Answer here
+Imagine we have a user-item table, where the items are movies showing each user's rating of that movie. 
+
+Combine all these clicks somehow, and normalize it between 0 and 1, as a measure of the user's engagement with that movie. Then use that as a confidence score-- multiply the user rating by the engagement data-- elementwise multiplication of matrices. 
+
+Could instead scale the user's *predicted* rating for that movie. 
+
+http://activisiongamescience.github.io/2016/01/11/Implicit-Recommender-Systems-Biased-Matrix-Factorization/ 
+
 
 <br/>
 
 **What is the cold start problem? ‍⭐️**
 
-Answer here
+How do you recommend a first thing to someone that you have no data on? Even if the website has existed already. 
 
 <br/>
 
 **Possible approaches to solving the cold start problem? ‍⭐️🚀**
 
-Answer here
+Squeeze out as much information as you can: 
+    • Use a subset of items and users that represent the population
+    • Mine their social media presence
+    • consider exploit vs explore-- how long do they click until you start recommending something
+    • https://www.kdnuggets.com/2019/01/data-scientist-dilemma-cold-start-machine-learning.html
+    • https://kojinoshiba.com/recsys-cold-start/
 
 <br/>
 
@@ -1075,5 +1165,44 @@ Answer here
 **What are the problems with using trees for solving time series problems? ‍⭐️**
 
 Answer here
+
+<br/>
+
+**What are Monte Carlo simulations? ‍⭐️**
+Monte Carlo simulations are a way of estimating a fixed parameter by repeatedly generating random numbers. By taking the random numbers generated and doing some computation on them, Monte Carlo simulations provide an approximation of a parameter where calculating it directly is impossible or prohibitively expensive. In practice, they’re used to forecast the weather, or estimate the probability of winning an election.
+
+To begin, MCMC methods pick a random parameter value to consider. The simulation will continue to generate random values (this is the Monte Carlo part), but subject to some rule for determining what makes a good parameter value. The trick is that, for a pair of parameter values, it is possible to compute which is a better parameter value, by computing how likely each value is to explain the data, given our prior beliefs. If a randomly generated parameter value is better than the last one, it is added to the chain of parameter values with a certain probability determined by how much better it is (this is the Markov chain part).
+
+A common use of Markov Chain Monte Carlo simulations is to estimate the posterior probability of a Bayesian inference problem. We know that the posterior distribution is somewhere in the range of our prior distribution and our likelihood distribution, but for whatever reason, we can’t compute it directly. Using MCMC methods, we’ll effectively draw samples from the posterior distribution, and then compute statistics like the average on the samples drawn.
+
+https://towardsdatascience.com/understanding-monte-carlo-simulation-eceb4c9cad4
+https://towardsdatascience.com/a-zero-math-introduction-to-markov-chain-monte-carlo-methods-dcba889e0c50
+<br/>
+
+
+**What are Markov Chains? ‍⭐️**
+
+Andrey Markov sought to prove that non-independent events may also conform to patterns. One of his best known examples required counting thousands of two-character pairs from a work of Russian poetry. Using those pairs, he computed the conditional probability of each character. That is, given a certain preceding letter or white space, there was a certain chance that the next letter would be an A, or a T, or a whitespace. Using those probabilities, Markov was able to simulate an arbitrarily long over a few periods, can be used to compute the long-run tendency of that variable if we understand the probabilities that govern its behavior.
+
+For generating markov chains: gibbs sampling or Metropolis-hastings algorithms
+https://jeremykun.com/2015/04/06/markov-chain-monte-carlo-without-all-the-bullshit/
+
+https://www.datasciencecentral.com/profiles/blogs/marketing-analytics-through-markov-chain
+
+<br/>
+
+**What is MCMC? ‍⭐️**
+
+MCMC  == "the roomba problem"
+MCMC methods are used to approximate the posterior distribution of a parameter of interest by random sampling in a probabilistic space.
+
+https://en.wikipedia.org/wiki/Gibbs_sampling
+http://www2.stat.duke.edu/~rcs46/modern_bayes17/lecturesModernBayes17/lecture-7/07-gibbs.pdf
+
+http://nitro.biosci.arizona.edu/courses/EEB596/handouts/Gibbs.pdf
+
+https://www.youtube.com/watch?v=h1NOS_wxgGg
+
+Say you have probabilty of raining, sunny, and cloudy. Task is to predict the next state using probability of each. But you don't have the probability of each available. So you keep the probability of all variables except one constant and then estimate the probability of the remaining one. Then repeat for all the variables. 
 
 <br/>
