@@ -59,7 +59,7 @@ Linear regression assumes four things:
 
 The normal distribution is a continuous distribution given by 
 
-$$\ f(x) =  \frac 1{\sigma\sqrt{2\pi}}{e^{-\frac{{(x-\mu)^2}}{2{\sigma^2}}}} $$
+<img src="https://render.githubusercontent.com/render/math?math=f(x) =  \frac 1{\sigma\sqrt{2\pi}}{e^{-\frac{{(x-\mu)^2}}{2{\sigma^2}}}}>
 
 Many phenomena in nature, such as human heights, follow this distribution. The Central Limit Theorem says that for any parameter you are trying to estimate by taking samples, as the number of samples approaches infinity, the distribution will approach the normal distribution, with mean identical to the true mean value of the parameter. 
 
