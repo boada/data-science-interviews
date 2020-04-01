@@ -59,7 +59,7 @@ Linear regression assumes four things:
 
 The normal distribution is a continuous distribution given by 
 
-<img src="https://render.githubusercontent.com/render/math?math=f(x) =  \frac 1{\sigma\sqrt{2\pi}}{e^{-\frac{{(x-\mu)^2}}{2{\sigma^2}}}}>
+$$\ \frac 1{\sigma\sqrt{2\pi}}{e^{-\frac{{(x-\mu)^2}}{2{\sigma^2}}}} $$
 
 Many phenomena in nature, such as human heights, follow this distribution. The Central Limit Theorem says that for any parameter you are trying to estimate by taking samples, as the number of samples approaches infinity, the distribution will approach the normal distribution, with mean identical to the true mean value of the parameter. 
 
@@ -994,6 +994,12 @@ where U is an n x p orthogonal matrix ($$\ U^{T}U = I_p), V is a p x p orthogona
 
 <br/>
 
+
+**Do different matrix factorization techniques yield the same results? If so, why, and if not, why not?  ‍⭐️**
+
+Generous Hint: Compare non-negative matrix factorization, the technique used for collaborative filtering, vs something like PCA.
+
+<br/>
 
 ## Ranking and search
 
