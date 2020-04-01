@@ -992,6 +992,10 @@ $$\ X = UDV^T $$,
 
 where U is an n x p orthogonal matrix ($$\ U^{T}U = I_p), V is a p x p orthogonal matrix, and D is a p x p diagonal matrix whose diagonal entries are all >= 0. The columns of U are known as the *left singular vectors*, the columns of V are known as the *right singular vectors*, and the diagonal entries of D are known as the *singular values*. (Note: the columns of UD are called the *principal components* of X.)
 
+Singular value decomposition is used for both PCA and collaborative filtering. 
+
+https://www.youtube.com/watch?v=P5mlg91as1c&feature=youtu.be
+
 <br/>
 
 
@@ -1183,6 +1187,7 @@ A common use of Markov Chain Monte Carlo simulations is to estimate the posterio
 
 https://towardsdatascience.com/understanding-monte-carlo-simulation-eceb4c9cad4
 https://towardsdatascience.com/a-zero-math-introduction-to-markov-chain-monte-carlo-methods-dcba889e0c50
+https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers
 <br/>
 
 
