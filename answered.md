@@ -990,7 +990,7 @@ Suppose our data consists of an n x p matrix $$\ X $$. Singular value decomposit
 
 $$\ X = UDV^T $$,
 
-where U is an n x p orthogonal matrix ($$\ U^{T}U = I_p), V is a p x p orthogonal matrix, and D is a p x p diagonal matrix whose entries are all >= 0 and are known as the *singular values*. (Note: the columns of UD are called the *principal components* of X.)
+where U is an n x p orthogonal matrix ($$\ U^{T}U = I_p), V is a p x p orthogonal matrix, and D is a p x p diagonal matrix whose diagonal entries are all >= 0. The columns of U are known as the *left singular vectors*, the columns of V are known as the *right singular vectors*, and the diagonal entries of D are known as the *singular values*. (Note: the columns of UD are called the *principal components* of X.)
 
 <br/>
 
