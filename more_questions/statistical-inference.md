@@ -24,11 +24,15 @@
 
 #### 12. What is maximum likelihood estimation? Could there be any case where it doesn’t exist?
 
-#### 13. What’s the difference between a MAP, MOM, MLE estima\- tor? In which cases would you want to use each?
+#### 13. What is the liklelihood ratio test?
 
-#### 14. What is a confidence interval and how do you interpret it?
+#### 14. How can you test whether your respone variable (or for that matter any parameter) follows a given distribution? (Not just Gaussian)?
 
-#### 15. What is unbiasedness as a property of an estimator? Is this always a desirable property when performing inference? What about in data analysis or predictive modeling?
+#### 15. What’s the difference between a MAP, MOM, MLE estima\- tor? In which cases would you want to use each?
 
-#### 16. What is Selection Bias?
+#### 16. What is a confidence interval and how do you interpret it?
+
+#### 17. What is unbiasedness as a property of an estimator? Is this always a desirable property when performing inference? What about in data analysis or predictive modeling?
+
+#### 18. What is Selection Bias?
   
