@@ -26,6 +26,27 @@
 
 #### 13. What is the liklelihood ratio test?
 
+The likelihood ratio test is for comparing nested models of different complexity. It assesses whether the better fit of the more complex model is statistically significant. It does this in the following way: 
+
+Let the likelihood L(M) of a model M be P(Data|M). 
+
+Then given our models M1 and M2, the *likelihood ratio* LR is: 
+
+LR = L(M1) / L(m2). 
+
+Let 
+Delta = ln(LR^2) = 2*(ln(L(M1) - ln(L(M2))).
+
+If the simpler model is the "true" model, then Delta follows a chi-square distribution, with degrees of freedom equal to the number of extra parameters in the more complicated models. So, setting as our null hypothesis that the simpler model is the true model, we can test whether the difference between the expected value of Delta under that hypothesis (given by the chi-square distribution) and our observed value is statistically significant. 
+
+
+https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.2041-210X.2010.00063.x
+
+https://astrostatistics.psu.edu/su08/lecturenotes/rao_model08.pdf
+
+https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-are-the-likelihood-ratio-wald-and-lagrange-multiplier-score-tests-different-andor-similar/
+
+
 #### 14. How can you test whether your respone variable (or for that matter any parameter) follows a given distribution? (Not just Gaussian)?
 
 #### 15. What’s the difference between a MAP, MOM, MLE estima\- tor? In which cases would you want to use each?
@@ -36,3 +57,4 @@
 
 #### 18. What is Selection Bias?
   
+
