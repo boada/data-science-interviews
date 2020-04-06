@@ -809,13 +809,23 @@ Answer here
 
 **How can we use machine learning for text classification? ‍⭐️**
 
-Answer here
+There are several different kinds of task: topic classification (spam or not; appropriate or not, etc.), sentiment analysis, language detection. 
+
+Some of the most popular machine learning algorithms for creating text classification models include logistic regression, gradient boosted trees, the naive bayes family of algorithms, support vector machines, and deep learning.
+ 
+https://monkeylearn.com/text-classification/
+
+https://hangouts.google.com/_/elUi/chat-redirect?authuser=2&dest=https%3A%2F%2Fdevelopers.google.com%2Fmachine-learning%2Fguides%2Ftext-classification
 
 <br/>
 
 **What is bag of words? How we can use it for text classification? ‍⭐️**
 
-Answer here
+Transform each text into a numerical representation in the form of a vector. With bag of words, a vector represents the frequency of a word in a predefined dictionary of words. For example, if we have defined our dictionary to have the following words {This, is, the, not, awesome, bad, basketball}, and we wanted to vectorize the text “This is awesome”, we would have the following vector representation of that text: (1, 1, 0, 0, 1, 0, 0). The machine learning algorithm is fed with training data that consists of pairs of feature sets (vectors for each text example) and tags (e.g. sports, politics) to produce a classification model.
+
+You can also have bags of N-grams-- see below. 
+
+Bag of words provides a straightforward and interpretable numerical representation of texts, from which it's easy to extract certain information that might be important. It gives a definition of the distance between phrases, which can be used to represent how similar they are.
 
 <br/>
 
@@ -827,7 +837,7 @@ Answer here
 
 **What are N-grams? How can we use them? ‍⭐️**
 
-Answer here
+N-grams are phrases consisting of N-many words. 
 
 <br/>
 
