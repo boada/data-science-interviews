@@ -815,7 +815,11 @@ Some of the most popular machine learning algorithms for creating text classific
  
 https://monkeylearn.com/text-classification/
 
-https://hangouts.google.com/_/elUi/chat-redirect?authuser=2&dest=https%3A%2F%2Fdevelopers.google.com%2Fmachine-learning%2Fguides%2Ftext-classification
+https://developers.google.com/machine-learning/guides/text-classification
+
+https://developers.google.com/machine-learning/guides/text-classification/step-2-5
+
+http://uc-r.github.io/creating-text-features#ngrams
 
 <br/>
 
