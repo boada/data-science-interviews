@@ -821,6 +821,8 @@ https://developers.google.com/machine-learning/guides/text-classification/step-2
 
 http://uc-r.github.io/creating-text-features#ngrams
 
+https://machinelearningmastery.com/what-are-word-embeddings/ https://towardsdatascience.com/word-bags-vs-word-sequences-for-text-classification-e0222c21d2ec https://towardsdatascience.com/tf-idf-for-document-ranking-from-scratch-in-python-on-real-world-dataset-796d339a4089
+
 <br/>
 
 **What is bag of words? How we can use it for text classification? ‍⭐️**
