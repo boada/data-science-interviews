@@ -868,13 +868,31 @@ Probably no bigger than 3 or 4 at the absolute maximum. Very few quartets of wor
 
 **What is TF-IDF? How is it useful for text classification? ‍⭐️**
 
-Answer here
+TF-IDF is a more sophisticated strategy (than Bag of Words) for representing a document as a numeric vector. As with Bag of Words, TF-IDF begins with a pre-determined, ordered vocabulary. Then, for each document, each word in that document is assigned a TF-IDF score (relative to that document) in the manner described below; then the document is represented as the vector of TF-IDF scores of each word in the vocabulary for that document. 
+
+If w is a word and d is a document, the TF-IDF score TF-IDF(w,d) of w relative to d is: 
+TF-IDF(w,d) = TF(w,d) * IDF(w),
+
+where: 
+
+TF(w,d) = is the count of occurrences of w in d divided by the number of words in d, and 
+IDF(w) is the *inverse* of (a measure of) the *frequency* of w among the documents in the corpus. 
+
+More specifically (defining IDF(w)): 
+
+Let DF(w) = the number of times w occurs in the documents in the corpus (all taken together), and N be the number of documents in the corpus. Then 
+
+IDF(w) = log(N/(DF(w) + 1))
+
+We divide N by DF(w) to normalize (scaling our measure of inverse frequency by the number of documents). We take the log because as N increases, N/DF(w) explodes. And we add 1 so that we never take the log of 0, even when DF(w) = 0. 
 
 <br/>
 
+
+
 **Which model would you use for text classification with bag of words features? ‍⭐️**
 
-Answer here
+You could use any of several classifiers that take numeric vectors as inputs: logistic regression, tree-based classifiers, support vector machines, etc. 
 
 <br/>
 
