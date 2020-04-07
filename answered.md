@@ -839,19 +839,17 @@ Tokenizing is when you break up a text, usually into its constituent words and s
 
 **What is bag of words? How we can use it for text classification? ‍⭐️**
 
-Transform each text into a numerical representation in the form of a vector. With bag of words, you start with a predefined, ordered dictionary of words. Then any text can be represented as a vector of the same length as the dictionary, where the value for each place in the vector is the count, in that text, of the word occurring in that place in the dictionary. For example, if we have defined our dictionary to have the following words [This, is, the, not, awesome, bad, basketball], and we wanted to vectorize the text “This is awesome”, we would have the following vector representation of that text: [1, 1, 0, 0, 1, 0, 0]. The machine learning algorithm is fed with training data that consists of pairs of feature sets (vectors for each text example) and tags (e.g. sports, politics) to produce a classification model.
+Bag of words is a strategy for representing texts (*documents*) as numeric vectors, so that computers can investigate and operate on them. With bag of words, you start with a predefined, ordered dictionary of words. Then any document can be represented as a vector of the same length as the dictionary, where the value for each place in the vector is the count, in that document, of the word occurring in that place in the dictionary. For example, suppose we have defined our dictionary to have the following words: [This, is, the, not, awesome, bad, basketball], and suppose we want to vectorize the document consisting of the single sentence “This is awesome”. We would represent the document by the following vector: [1, 1, 0, 0, 1, 0, 0]. Given a representation of documents as numeric vectors, we can then calculate various things, such as cosine similarity of two vectors, to give a measure of how similar two documents are. For classification tasks, we can tag these vectors with categories in a response variable, and train a classification model, such as logistic regression or tree-based classifiers, on the result.
 
-You can also have bags of N-grams-- see below. 
-
-Bag of words provides a straightforward and interpretable numerical representation of texts, from which it's easy to extract certain information that might be important. It gives a definition of the distance between phrases, which can be used to represent how similar they are.
+In a variation on the above, you can use N-grams instead of individual words-- see below. 
 
 <br/>
 
 **What are the advantages and disadvantages of bag of words? ‍⭐️**
 
-One obvious disadvantage is that bag of words (in its simplest implementation-- see below) ignores grammar entirely. In the above example, "This is awesome" is the same as "is awesome this"; they are both represented by the vector [1, 1, 0, 0, 1, 0, 0]. Another disadvantage is that bag of words more or less ignores associations between words, such as between 'miserable' and 'distraught'. 
+One obvious disadvantage is that bag of words (in its simplest implementation-- see below) ignores grammar entirely. In the above example, "This is awesome" is the same as "is awesome this"; they are both represented by the vector [1, 1, 0, 0, 1, 0, 0]. Another disadvantage is that bag of words more or less ignores associations between words, such as between 'miserable' and 'distraught'. A third disadvantage is that *stopwords* (words such as 'is' and 'the') occur very frequently in most documents. So unless the stopwords are removed, two objectively dissimilar documents might easily be counted as similar because of containing similar proportions of stopwords. On the other hand, when you remove stopwords entirely, you are assuming they have essentially *no* effect on the identity of a document, which might be overkill. 
 
-However, a surprisingly large number of tasks can be accomplished just by looking at word counts, and for those bag of words is sufficient. Some advantages of bag of words are that it is very easy to understand, light on memory, and fast to train if you have your dictionary already. 
+All that being said, a surprisingly large number of tasks can be accomplished just by looking at word counts, and for those bag of words is sufficient. Some advantages of bag of words are that it is light on memory, and fast to train if you have your dictionary already. 
 
 <br/>
 
@@ -864,7 +862,7 @@ N-grams are phrases consisting of N-many words. Creating a bag of N-grams instea
 
 **How large should be N for our bag of words when using N-grams? ‍⭐️**
 
-Probably no bigger than 3 or 4 at the absolute maximum. Few quartets of words occur so commonly together that it makes sense to treat them this way--namely, more or less as a single word. N is called the range of an N-gram. 
+Probably no bigger than 3 or 4 at the absolute maximum. Very few quartets of words occur so commonly together that it makes sense to treat them this way--namely, more or less as a single word. N is called the range of an N-gram. 
 
 <br/>
 
@@ -910,9 +908,9 @@ Answer here
 
 <br/>
 
-**What are sequence models?  ‍⭐️**
+**What is the difference between a sequence model and an N-gram model?  ‍⭐️**
 
-Answer here
+NLP models can be broadly classified into two categories: those that use word ordering information (sequence models), and ones that just see text as “bags” (sets) of words (n-gram models). Types of sequence models include convolutional neural networks (CNNs), recurrent neural networks (RNNs), and their variations. Types of n-gram models include logistic regression, simple multi- layer perceptrons (MLPs, or fully-connected neural networks), gradient boosted trees and support vector machines.
 
 <br/>
 
