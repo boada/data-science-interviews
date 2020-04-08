@@ -898,7 +898,10 @@ You could use any of several classifiers that take numeric vectors as inputs: lo
 
 **Would you prefer gradient boosting trees model or logistic regression when doing text classification with bag of words? ‍⭐️**
 
-Answer here
+One should generally start with linear models unless domain knowledge gives one reasons to believe it is an inappropriate tool. Indeed, it is common for people to use logistic regression for text classification. 
+
+However, here's an argument that tree-based methods can be appropriate also: 
+Logistic regression makes the most sense when the predictors are numeric variables, specifically real numbers. Gradient boosting is preferable to logistic regression when the predictors are categorical. Now, there is a subtlety here, because  but that is not the case with bag of words; each predictor is numerical. On the other hand, since the predictor values are nonnegative integers of limited size (word counts in a document), perhaps they can reasonably be treated as high-cardinality categorical variables. 
 
 <br/>
 
