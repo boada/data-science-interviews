@@ -609,25 +609,30 @@ Grid search performs an exhaustive search of all possible parameters available t
 
 **What kind of problems neural nets can solve? 👶**
 
-Classification and regression.
+Both supervised and unsupervised learning problems. Supervised: classification and regression. Unsupervised: automatic target recognition.
 <br/>
 
 **How does a usual fully-connected feed-forward neural network work? ‍⭐️**
 
-Answer here
+A feedforward neural network is an artificial neural network in which connections between the nodes do not form a cycle. Fully connected means that in each layer, every node in that layer is connected to every node in the next layer. 
+
+It starts with the nodes in the input layer having certain levels of activation. Then that propagates to the next layer via an activation function for each neuron in the hidden layers-- each hidden neuron's activation level is determined by the activation function, applied to the activation levels of all neurons in the previous layer, plus the weights of their connection to that neuron. This continues from layer to layer until the output layer-- the output is the activation levels of the output layer neurons. 
 
 <br/>
 
 **Why do we need activation functions? 👶**
 
-Answer here
+Activation functions specify how the activation level of a neuron depend on those of the inputs feeding into it (and the weights connecting them). The activation function provides a smooth, differentiable transition in activation levels from layer to layer as input values change; i.e., a small change in input produces a small change in output. We need the transition in activation levels to be smooth and differentiable because the gradient of this function is used when training the network (so it must be well-defined!). 
 
 <br/>
 
 **What are the problems with sigmoid as an activation function? ‍⭐️**
 
-Answer here
+1. Sigmoid saturate and kill gradients: The output of sigmoid saturates (i.e. the curve becomes parallel to x-axis) for a large positive or large negative number. Thus, the gradient at these regions is almost zero. During backpropagation, this local gradient is multiplied with the gradient of this gates’ output. Thus, if the local gradient is very small, it’ll kill the the gradient and the network will not learn. This problem of vanishing gradient is solved by ReLU.
 
+2. Not zero-centered: Sigmoid outputs are not zero-centered, which is undesirable because it can indirectly introduce undesirable zig-zagging dynamics in the gradient updates for the weights.
+
+https://kharshit.github.io/blog/2018/04/20/don%27t-use-sigmoid-neural-nets
 <br/>
 
 **What is ReLU? How is it better than sigmoid or tanh? ‍⭐️**
@@ -650,13 +655,15 @@ Answer here
 
 **What regularization techniques for neural nets do you know? ‍⭐️**
 
-Answer here
+Dropout. 
 
 <br/>
 
 **What is dropout? Why is it useful? How does it work? ‍⭐️**
 
-Answer here
+Dropout is a method for reducing overfitting when you are training a neural network. The flexibility of a neural network lies partly in the number of nodes in its hidden layers. Dropout is where, while training, you drop a specified number of randomly selected nodes from a hidden layer. You can do this on multiple hidden layers, and the number can be different for each hidden layer. 
+
+Dropout is useful because it reduces overfitting. Essentially it reduces the complexity of the network. 
 
 <br/>
 
