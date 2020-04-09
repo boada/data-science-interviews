@@ -609,25 +609,30 @@ Grid search performs an exhaustive search of all possible parameters available t
 
 **What kind of problems neural nets can solve? 👶**
 
-Classification and regression.
+Both supervised and unsupervised learning problems. Supervised: classification and regression. Unsupervised: automatic target recognition.
 <br/>
 
 **How does a usual fully-connected feed-forward neural network work? ‍⭐️**
 
-Answer here
+A feedforward neural network is an artificial neural network in which connections between the nodes do not form a cycle. Fully connected means that in each layer, every node in that layer is connected to every node in the next layer. 
+
+It starts with the nodes in the input layer having certain levels of activation. Then that propagates to the next layer via an activation function for each neuron in the hidden layers-- each hidden neuron's activation level is determined by the activation function, applied to the activation levels of all neurons in the previous layer, plus the weights of their connection to that neuron. This continues from layer to layer until the output layer-- the output is the activation levels of the output layer neurons. 
 
 <br/>
 
 **Why do we need activation functions? 👶**
 
-Answer here
+Activation functions specify how the activation level of a neuron depend on those of the inputs feeding into it (and the weights connecting them). The activation function provides a smooth, differentiable transition in activation levels from layer to layer as input values change; i.e., a small change in input produces a small change in output. We need the transition in activation levels to be smooth and differentiable because the gradient of this function is used when training the network (so it must be well-defined!). 
 
 <br/>
 
 **What are the problems with sigmoid as an activation function? ‍⭐️**
 
-Answer here
+1. Sigmoid saturate and kill gradients: The output of sigmoid saturates (i.e. the curve becomes parallel to x-axis) for a large positive or large negative number. Thus, the gradient at these regions is almost zero. During backpropagation, this local gradient is multiplied with the gradient of this gates’ output. Thus, if the local gradient is very small, it’ll kill the the gradient and the network will not learn. This problem of vanishing gradient is solved by ReLU.
 
+2. Not zero-centered: Sigmoid outputs are not zero-centered, which is undesirable because it can indirectly introduce undesirable zig-zagging dynamics in the gradient updates for the weights.
+
+https://kharshit.github.io/blog/2018/04/20/don%27t-use-sigmoid-neural-nets
 <br/>
 
 **What is ReLU? How is it better than sigmoid or tanh? ‍⭐️**
@@ -650,13 +655,15 @@ Answer here
 
 **What regularization techniques for neural nets do you know? ‍⭐️**
 
-Answer here
+Dropout. 
 
 <br/>
 
 **What is dropout? Why is it useful? How does it work? ‍⭐️**
 
-Answer here
+Dropout is a method for reducing overfitting when you are training a neural network. The flexibility of a neural network lies partly in the number of nodes in its hidden layers. Dropout is where, while training, you drop a specified number of randomly selected nodes from a hidden layer. You can do this on multiple hidden layers, and the number can be different for each hidden layer. 
+
+Dropout is useful because it reduces overfitting. Essentially it reduces the complexity of the network. 
 
 <br/>
 
@@ -809,49 +816,99 @@ Answer here
 
 **How can we use machine learning for text classification? ‍⭐️**
 
-Answer here
+There are several different kinds of task: topic classification (spam or not; appropriate or not, etc.), sentiment analysis, language detection. 
+
+Some of the most popular machine learning algorithms for creating text classification models include logistic regression, gradient boosted trees, the naive bayes family of algorithms, support vector machines, and deep learning.
+ 
+https://monkeylearn.com/text-classification/
+
+https://developers.google.com/machine-learning/guides/text-classification
+
+https://developers.google.com/machine-learning/guides/text-classification/step-2-5
+
+http://uc-r.github.io/creating-text-features#ngrams
+
+https://machinelearningmastery.com/what-are-word-embeddings/ 
+
+https://towardsdatascience.com/word-bags-vs-word-sequences-for-text-classification-e0222c21d2ec 
+
+https://towardsdatascience.com/tf-idf-for-document-ranking-from-scratch-in-python-on-real-world-dataset-796d339a4089
 
 <br/>
 
+
+**What is tokenizing? ‍⭐️**
+
+Tokenizing is when you break up a text, usually into its constituent words and store them separately. There are tricky questions sometimes about how to break things up. E.g., should we break "aren't" into "aren" and "t"? That produces garbage. But if you break it into "are" and "not", you are inserting characters that weren't there before. 
+
+<br/>
+
+
 **What is bag of words? How we can use it for text classification? ‍⭐️**
 
-Answer here
+Bag of words is a strategy for representing texts (*documents*) as numeric vectors, so that computers can investigate and operate on them. With bag of words, you start with a predefined, ordered dictionary of words. Then any document can be represented as a vector of the same length as the dictionary, where the value for each place in the vector is the count, in that document, of the word occurring in that place in the dictionary. For example, suppose we have defined our dictionary to have the following words: [This, is, the, not, awesome, bad, basketball], and suppose we want to vectorize the document consisting of the single sentence “This is awesome”. We would represent the document by the following vector: [1, 1, 0, 0, 1, 0, 0]. Given a representation of documents as numeric vectors, we can then calculate various things, such as cosine similarity of two vectors, to give a measure of how similar two documents are. For classification tasks, we can tag these vectors with categories in a response variable, and train a classification model, such as logistic regression or tree-based classifiers, on the result.
+
+In a variation on the above, you can use N-grams instead of individual words-- see below. 
 
 <br/>
 
 **What are the advantages and disadvantages of bag of words? ‍⭐️**
 
-Answer here
+One obvious disadvantage is that bag of words (in its simplest implementation-- see below) ignores grammar entirely. In the above example, "This is awesome" is the same as "is awesome this"; they are both represented by the vector [1, 1, 0, 0, 1, 0, 0]. Another disadvantage is that bag of words more or less ignores associations between words, such as between 'miserable' and 'distraught'. A third disadvantage is that *stopwords* (words such as 'is' and 'the') occur very frequently in most documents. So unless the stopwords are removed, two objectively dissimilar documents might easily be counted as similar because of containing similar proportions of stopwords. On the other hand, when you remove stopwords entirely, you are assuming they have essentially *no* effect on the identity of a document, which might be overkill. 
+
+All that being said, a surprisingly large number of tasks can be accomplished just by looking at word counts, and for those bag of words is sufficient. Some advantages of bag of words are that it is light on memory, and fast to train if you have your dictionary already. 
 
 <br/>
 
 **What are N-grams? How can we use them? ‍⭐️**
 
-Answer here
+N-grams are phrases consisting of N-many words. Creating a bag of N-grams instead of a bag of words is a good way to overcome some of the weaknesses of bag of words. N-grams are a way of incorporating more context. They are also a way of picking up single concepts that don't fit in one word narrowly defined, such as 'San Francisco' or 'witch hunt'. Those phrases mean something different when they occur unified, which a normal bag of words won't pick up on. 
 
 <br/>
 
+
 **How large should be N for our bag of words when using N-grams? ‍⭐️**
 
-Answer here
+Probably no bigger than 3 or 4 at the absolute maximum. Very few quartets of words occur so commonly together that it makes sense to treat them this way--namely, more or less as a single word. N is called the range of an N-gram. 
 
 <br/>
 
 **What is TF-IDF? How is it useful for text classification? ‍⭐️**
 
-Answer here
+TF-IDF is a more sophisticated strategy (than Bag of Words) for representing a document as a numeric vector. As with Bag of Words, TF-IDF begins with a pre-determined, ordered vocabulary. Then, for each document, each word in that document is assigned a TF-IDF score (relative to that document) in the manner described below; then the document is represented as the vector of TF-IDF scores of each word in the vocabulary for that document. 
+
+If w is a word and d is a document, the TF-IDF score TF-IDF(w,d) of w relative to d is: 
+TF-IDF(w,d) = TF(w,d) * IDF(w),
+
+where: 
+
+TF(w,d) = is the count of occurrences of w in d divided by the number of words in d, and 
+IDF(w) is the *inverse* of (a measure of) the *frequency* of w among the documents in the corpus. 
+
+More specifically (defining IDF(w)): 
+
+Let DF(w) = the number of times w occurs in the documents in the corpus (all taken together), and N be the number of documents in the corpus. Then 
+
+IDF(w) = log(N/(DF(w) + 1))
+
+We divide N by DF(w) to normalize (scaling our measure of inverse frequency by the number of documents). We take the log because as N increases, N/DF(w) explodes. And we add 1 so that we never take the log of 0, even when DF(w) = 0. 
 
 <br/>
 
+
+
 **Which model would you use for text classification with bag of words features? ‍⭐️**
 
-Answer here
+You could use any of several classifiers that take numeric vectors as inputs: logistic regression, tree-based classifiers, support vector machines, etc. 
 
 <br/>
 
 **Would you prefer gradient boosting trees model or logistic regression when doing text classification with bag of words? ‍⭐️**
 
-Answer here
+One should generally start with linear models unless domain knowledge gives one reasons to believe it is an inappropriate tool. Indeed, it is common for people to use logistic regression for text classification. 
+
+However, here's an argument that tree-based methods can be appropriate also: 
+Logistic regression makes the most sense when the predictors are numeric variables, specifically real numbers. Gradient boosting is preferable to logistic regression when the predictors are categorical. Now, there is a subtlety here, because  but that is not the case with bag of words; each predictor is numerical. On the other hand, since the predictor values are nonnegative integers of limited size (word counts in a document), perhaps they can reasonably be treated as high-cardinality categorical variables. 
 
 <br/>
 
@@ -876,6 +933,12 @@ Answer here
 **Would you prefer gradient boosting trees model or logistic regression when doing text classification with embeddings? ‍⭐️**
 
 Answer here
+
+<br/>
+
+**What is the difference between a sequence model and an N-gram model?  ‍⭐️**
+
+NLP models can be broadly classified into two categories: those that use word ordering information (sequence models), and ones that just see text as “bags” (sets) of words (n-gram models). Types of sequence models include convolutional neural networks (CNNs), recurrent neural networks (RNNs), and their variations. Types of n-gram models include logistic regression, simple multi- layer perceptrons (MLPs, or fully-connected neural networks), gradient boosted trees and support vector machines.
 
 <br/>
 
