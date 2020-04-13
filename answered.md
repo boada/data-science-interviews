@@ -637,19 +637,23 @@ https://kharshit.github.io/blog/2018/04/20/don%27t-use-sigmoid-neural-nets
 
 **What is ReLU? How is it better than sigmoid or tanh? ‍⭐️**
 
-Answer here
+'ReLU' stands for Rectified Linear Unit. It is defined as:
+
+f(x) = max(0,x)
+
+If your learning rate is high and you backpropagate a large signal backwards, the result will be negative and so your neuron's activation will be set to 0, and will continue to be 0 henceforth. You can avoid this by using leaky ReLU.
 
 <br/>
 
 **How we can initialize the weights of a neural network? ‍⭐️**
 
-Answer here
+It's standard to initialize them to be random numbers. The weights might converge to different local minima of the cost function, depending on how they're initialized. So you could try initializing with several different random vectors and seeing if you get the same thing. 
 
 <br/>
 
 **What if we set all the weights of a neural network to 0? ‍⭐️**
 
-Answer here
+Then the network will not provide any outputs. If this is done before training, that makes it impossible to train. 
 
 <br/>
 
@@ -672,13 +676,13 @@ Dropout is useful because it reduces overfitting. Essentially it reduces the com
 
 **What is backpropagation? How does it work? Why do we need it? ‍⭐️**
 
-Answer here
+It is an algorithm that is used in one step of training a neural network. You compare the current output to the desired one, and see what's the difference. Then you decide, for each neuron in the output layer, which direction its activation level needs to change (up or down) and by how much. Then, for each of these neurons, you examine each neuron in the previous layer and figure out which direction *its* activation needs to change (and by how much) to produce this effect. From this, you get an amount that the weight of each connection (of each neuron in the previous layer) to your neuron needs to change. You repeat this for each neuron in the output layer and average the results. *Then*, you repeat this process, except this time treating the second-to-last layer as the output layer and adjusting the weights connecting it to the third-to-last layer. Repeat the process, "propagating" the changes backward through the network, until all the layers in the network have been considered. 
 
 <br/>
 
 **Which optimization techniques for training neural nets do you know? ‍⭐️**
 
-Answer here
+Backpropagation!
 
 <br/>
 
@@ -690,19 +694,19 @@ Answer here
 
 **What’s the learning rate? 👶**
 
-Answer here
+In gradient descent, the learning rate is the size of the step that you take along the steepest gradient. 
 
 <br/>
 
 **What happens when the learning rate is too large? Too small? 👶**
 
-Answer here
+If the learning rate is too large, you may miss (overshoot) a local minimum. If it's too small, it will take too long / be too computationally expensive to reach a local minimum. 
 
 <br/>
 
 **How to set the learning rate? ‍⭐️**
 
-Answer here
+This is a hyperparameter that can be tuned. Also, ideally the learning rate should be proportional to the magnitude of the gradient (and so, change as the magnitude of the gradient changes). That way you make finer adjustments as you get closer to the local minimum of the loss function. 
 
 <br/>
 
@@ -720,7 +724,7 @@ Answer here
 
 **Do we want to have a constant learning rate or we better change it throughout training? ‍⭐️**
 
-Answer here
+Ideally, the learning rate should be proportional to the magnitude of the gradient (and so, change as the magnitude of the gradient changes). That way you make finer adjustments as you get closer to the local minimum of the loss function.
 
 <br/>
 
