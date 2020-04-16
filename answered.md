@@ -657,6 +657,7 @@ Then the network will not provide any outputs. If this is done before training, 
 
 <br/>
 
+
 **What regularization techniques for neural nets do you know? ‍⭐️**
 
 Dropout. 
@@ -676,13 +677,23 @@ Dropout is useful because it reduces overfitting. Essentially it reduces the com
 
 **What is backpropagation? How does it work? Why do we need it? ‍⭐️**
 
-It is an algorithm that is used in one step of training a neural network. You compare the current output to the desired one, and see what's the difference. Then you decide, for each neuron in the output layer, which direction its activation level needs to change (up or down) and by how much. Then, for each of these neurons, you examine each neuron in the previous layer and figure out which direction *its* activation needs to change (and by how much) to produce this effect. From this, you get an amount that the weight of each connection (of each neuron in the previous layer) to your neuron needs to change. You repeat this for each neuron in the output layer and average the results. *Then*, you repeat this process, except this time treating the second-to-last layer as the output layer and adjusting the weights connecting it to the third-to-last layer. Repeat the process, "propagating" the changes backward through the network, until all the layers in the network have been considered. 
+It is an algorithm for determining how (in direction and magnitude) a single training example would like to nudge the weights and biases of each neuron in a neural network, to cause the most rapid decreases in the cost function. In an ideal gradient descent, you do this for each training example, and then average the desired changes demanded by all of the training examples. Since that is computationally infeasible, one typically uses stochastic gradient descent instead (another subject)-- randomly divide the data into mini-batches, and compute each step with respect to a mini-batch, going through all mini-batches.
+
+In backpropagation, you start with a single training example. You compare the current output to the desired one, and see what's the difference. Then you decide, for each neuron in the output layer, which direction its activation level needs to change (up or down) and by how much. Then, for each of these neurons, you examine each neuron in the previous layer and figure out which direction *its* activation needs to change (and by how much) to produce this effect. From this, you get an amount that the weight of each connection (of each neuron in the previous layer) to your neuron needs to change. You repeat this for each neuron in the output layer and average the results. *Then*, you repeat this process, except this time treating the second-to-last layer as the output layer and adjusting the weights connecting it to the third-to-last layer. Repeat the process, "propagating" the changes backward through the network, until all the layers in the network have been considered. 
 
 <br/>
 
+
+**When you do forward propagation, are you already adjusting the weights and biases? Or just in backpropagation? ‍⭐️**
+
+Only in backpropagation. 
+
+<br/>
+
+
 **Which optimization techniques for training neural nets do you know? ‍⭐️**
 
-Backpropagation!
+Mini-batching, ADAM. 
 
 <br/>
 
@@ -694,13 +705,13 @@ Answer here
 
 **What’s the learning rate? 👶**
 
-In gradient descent, the learning rate is the size of the step that you take along the steepest gradient. 
+In gradient descent, the learning rate is the size of the step that you take along the steepest gradient. In neural networks, the learning rate is the rate at which you update your weights. Each data point demands a certain change to the bias and weights of each neuron. But to avoid overfitting, instead of simply updating the bias and weights by the amount that that data point demands, you instead retard that adjustment by a specified amount-- that amount is the learning rate. 
 
 <br/>
 
 **What happens when the learning rate is too large? Too small? 👶**
 
-If the learning rate is too large, you may miss (overshoot) a local minimum. If it's too small, it will take too long / be too computationally expensive to reach a local minimum. 
+If the learning rate is too large, you may miss (overshoot) a local minimum of the cost function. If it's too small, it will take too long / be too computationally expensive to reach a local minimum. 
 
 <br/>
 
