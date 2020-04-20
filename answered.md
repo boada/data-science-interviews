@@ -607,7 +607,9 @@ Grid search performs an exhaustive search of all possible parameters available t
 
 ## Neural networks
 
-**What kind of problems neural nets can solve? 👶**
+https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464
+
+**What kinds of problems can neural nets solve? 👶**
 
 Both supervised and unsupervised learning problems. Supervised: classification and regression. Unsupervised: automatic target recognition.
 <br/>
@@ -677,9 +679,9 @@ Dropout is useful because it reduces overfitting. Essentially it reduces the com
 
 **What is backpropagation? How does it work? Why do we need it? ‍⭐️**
 
-It is an algorithm for determining how (in direction and magnitude) a single training example would like to nudge the weights and biases of each neuron in a neural network, to cause the most rapid decreases in the cost function. In an ideal gradient descent, you do this for each training example, and then average the desired changes demanded by all of the training examples. Since that is computationally infeasible, one typically uses stochastic gradient descent instead (another subject)-- randomly divide the data into mini-batches, and compute each step with respect to a mini-batch, going through all mini-batches.
+Backpropagation is the algorithm used for training neural networks. It begins by determining, for each data point in the training set, how (in direction and magnitude) that data point would like to nudge the weights and biases of each neuron in the network, to cause the most rapid decreases in the cost function (gradient descent). In an ideal scenario, you would do this for each training example, and then average the desired changes demanded by all of the training examples. However, since that is computationally infeasible, one typically uses stochastic gradient descent instead (another subject)-- randomly divide the data into mini-batches, and compute each step with respect to a mini-batch, going through all mini-batches.
 
-In backpropagation, you start with a single training example. You compare the current output to the desired one, and see what's the difference. Then you decide, for each neuron in the output layer, which direction its activation level needs to change (up or down) and by how much. Then, for each of these neurons, you examine each neuron in the previous layer and figure out which direction *its* activation needs to change (and by how much) to produce this effect. From this, you get an amount that the weight of each connection (of each neuron in the previous layer) to your neuron needs to change. You repeat this for each neuron in the output layer and average the results. *Then*, you repeat this process, except this time treating the second-to-last layer as the output layer and adjusting the weights connecting it to the third-to-last layer. Repeat the process, "propagating" the changes backward through the network, until all the layers in the network have been considered. 
+In backpropagation, you start with a single training example. You compare the current output to the desired one, and see what's the difference. Then you decide, for each neuron in the output layer, in which direction its activation level needs to change (up or down) and by how much, for the current output to change to the desired output. Then, for each of these neurons, you examine each neuron in the *previous* layer, and figure out in which direction *its* activation needs to change (and by how much) to produce the effect on the chosen neuron in the output layer. From this, you get an amount that the weight of each connection (of each neuron in the second-to-last layer) to your chosen output neuron, as well as the bias of that neuron, needs to change, in order for your chosen neuron to provide the desired output for that data point. You repeat this for each neuron in the output layer and average the results. But now notice that at this point, you have suggested changes to make to the *second-to-last* layer, just as at the beginning, comparing the output layer with the desired output gave you suggested changes for the output layer. So you repeat the same process, except this time you treat the second-to-last layer as the output layer, and adjust (a) the biases of the neurons in the second-to-last layer and (b) the weights connecting the second-to-last to the third-to-last layer. Then keep repeat the process, "propagating" the suggested changes backward through the layers of the network, until all the layers have been considered. 
 
 <br/>
 
@@ -738,6 +740,40 @@ Answer here
 Ideally, the learning rate should be proportional to the magnitude of the gradient (and so, change as the magnitude of the gradient changes). That way you make finer adjustments as you get closer to the local minimum of the loss function.
 
 <br/>
+
+**When do you use which kind of neural network?**
+
+RNNs are typically used to be used when there's a time component. But they are not used as much anymore, especially in NLP. Now transformers are a significant competitor-- they are essentially CNNs with attention. 
+
+<br/>
+
+**What is attention?**
+
+In the context of words, attention is a weight matrix for each word, showing how much you need to pay attention to every other word in the sentence. In French we have articles that define gender. For an article you need to pay attention to a lot of the other words in the vicinity. RNNs are sequential, so as the sentence gets longer and longer you can get exploding or vanishing gradients, whereas attention doesn't get distored in that way since it runs in series rather than in parallel. 
+
+https://distill.pub/2016/augmented-rnns/
+
+https://jalammar.github.io/illustrated-transformer/
+
+<br/>
+
+
+**How do you decide on the architecture of a neural network?**
+
+The deeper the network is and the more neurons per layer, the more complicated predictions you can make / phenomena you can model. A lot of the time people simply try out different things. Overfitting is a concern when adding layers. However, dropout can also be used to reduce overfitting. The more layers you add, for certain problems it makes a huge difference. E.g., facial recognition. Also computational expense is a concern, but with transfer learning it's less of an issue. 
+
+For overfitting, add more layers and see how much better the performance gets. 20-25% dropout is the norm. 
+
+https://towardsdatascience.com/comprehensive-introduction-to-neural-network-architecture-c08c6d8e5d98
+
+https://towardsdatascience.com/neural-network-architectures-156e5bad51ba
+
+https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.79433&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false
+
+https://arxiv.org/pdf/1311.2901.pdf
+
+<br/>
+
 
 **How do we decide when to stop training a neural net? 👶**
 
@@ -808,11 +844,38 @@ Answer here
 
 <br/>
 
-**What is transfer learning? How does it work? ‍⭐️**
 
-Answer here
+**What is an autoencoder? ‍⭐️**
+
+You take a high information content Thing, like an image, and run it thought a bottleneck to reduce time and space requirements. It is like a non-linear dimensionality reduction method. 
+
+Decreasing numbers of neurons, and then re-increasing number of neurons, which is a decoder. 
+
+Google uses it when you download images from Google. 
+
+Variational auto encoder: in a regular encoder, in the middle there's avector that doesn;t change. In a variational auto-encoder, there;s a distribution rahter than a vector. You can sample the distribution and create things that didn't exist bnefore.,  The bottleneck is not a vector but rather a distributon. 
+
+At the bottleneck, each neuron has a set of values: the weights and biases, represented as a vector. But in variational autoencoders, the neurons in the squished layer instead vary within a given distribution(s). 
+
+https://towardsdatascience.com/teaching-a-variational-autoencoder-vae-to-draw-mnist-characters-978675c95776
 
 <br/>
+
+
+**What is transfer learning? How does it work? ‍⭐️**
+
+It used to be that you just train your network from scratch. FOr really complex problems you'd train it for weeks or months. But, you can actually take a network that's already trained on one dataset, and apply it to a different problem. That is transfer learning. All you have to do is fine tune it-- e.g., take the pre-trained network and train the last layer. If you don't have a million images, you just apply transfer learning, and because your network is already pre-trained it's already pretty far along. 
+
+You can take a network trained on household images and detect galaxies.  ResNet is the state of the art for image classification. 
+
+Why just the last layer? If we have a really deep network, could we take more off? It's a time/cost consideration. 
+
+And, in what kinds of situations would transfer learning not be a great idea? Very rarely do people train image classification models from scratch. People initially thought transfer learning couldn't be used for NLP, but now it's routine! 
+
+All that being said, for simple problems training your own models is ok. If you're an AI researcher you might need to do your own thing. If your domain is really different from what the network was trained in; e.g., usually you wouldn't use a network trained on images to do NLP. Though there are a few stories of this working well. 
+
+<br/>
+
 
 **What is object detection? Do you know any architectures for that? 🚀**
 
