@@ -760,9 +760,12 @@ https://jalammar.github.io/illustrated-transformer/
 
 **How do you decide on the architecture of a neural network?**
 
-The deeper the network is and the more neurons per layer, the more complicated predictions you can make / phenomena you can model. A lot of the time people simply try out different things. Overfitting is a concern when adding layers. However, dropout can also be used to reduce overfitting. The more layers you add, for certain problems it makes a huge difference. E.g., facial recognition. Also computational expense is a concern, but with transfer learning it's less of an issue. 
+Adding more layers and increasing the number of neurons per layer are both ways to make your model more complex, and so in principle they are ways of increasing the model's ability to model complicated problems. In practice, increasing the number of layers of neural networks tends to improve overall test set accuracy, whereas large, shallow networks tend to overfit more — which is one stimulus for using deep neural networks as opposed to shallow neural networks.
 
-For overfitting, add more layers and see how much better the performance gets. 20-25% dropout is the norm. 
+A lot of the time people simply try out different combinations of number of layers and neurons per layer. Although overfitting is a concern when adding layers (in addition to when increasing neurons per layer), dropout can be used to counteract that. And for certain problems having many layers makes a huge difference. E.g., facial recognition. A different concern that can affect architectural choices is computational expense. But with transfer learning it's less of an issue. 
+
+In all then: the common practice is simply to add more layers in a sequential manner and see how much better the performance gets. 20-25% dropout is the norm. 
+
 
 https://towardsdatascience.com/comprehensive-introduction-to-neural-network-architecture-c08c6d8e5d98
 
