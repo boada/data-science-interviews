@@ -847,6 +847,13 @@ Answer here
 
 <br/>
 
+**What is an LSTM? ‍⭐️**
+
+https://youtu.be/LHXXI4-IEns
+
+https://youtu.be/8HyCNIVRbSU
+
+<br/>
 
 **What is an autoencoder? ‍⭐️**
 
@@ -876,6 +883,11 @@ Why just the last layer? If we have a really deep network, could we take more of
 And, in what kinds of situations would transfer learning not be a great idea? Very rarely do people train image classification models from scratch. People initially thought transfer learning couldn't be used for NLP, but now it's routine! 
 
 All that being said, for simple problems training your own models is ok. If you're an AI researcher you might need to do your own thing. If your domain is really different from what the network was trained in; e.g., usually you wouldn't use a network trained on images to do NLP. Though there are a few stories of this working well. 
+
+<br/>
+
+**Why is there so little transfer learning associated with RNNs? ‍⭐️**
+For contingent historical reasons. As they were doing more RNNs, they came out with transformer networks, which got standardized. It's straightforwardo to build your own LSTM using pytorch. For language, there's basically nothing. For time series analysis, there are some people trying to do transfer learning. People did have trained word embeddings beforehand, such as GLOVE and word2vec, which can be put in as the first layer of your LSTM. 
 
 <br/>
 
