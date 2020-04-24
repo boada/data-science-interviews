@@ -632,6 +632,7 @@ Activation functions specify how the activation level of a neuron depend on thos
 
 1. Sigmoid saturate and kill gradients: The output of sigmoid saturates (i.e. the curve becomes parallel to x-axis) for a large positive or large negative number. Thus, the gradient at these regions is almost zero. During backpropagation, this local gradient is multiplied with the gradient of this gates’ output. Thus, if the local gradient is very small, it’ll kill the the gradient and the network will not learn. This problem of vanishing gradient is solved by ReLU.
 
+
 2. Not zero-centered: Sigmoid outputs are not zero-centered, which is undesirable because it can indirectly introduce undesirable zig-zagging dynamics in the gradient updates for the weights.
 
 https://kharshit.github.io/blog/2018/04/20/don%27t-use-sigmoid-neural-nets
@@ -846,6 +847,12 @@ Answer here
 Answer here
 
 <br/>
+
+
+**What is the vanishing gradient problem? ‍⭐️**
+
+<br/>
+
 
 **What is an LSTM? ‍⭐️**
 
