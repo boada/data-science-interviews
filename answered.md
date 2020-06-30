@@ -771,6 +771,8 @@ Ideally, the learning rate should be proportional to the magnitude of the gradie
 
 **What is an RNN? ‍⭐️**
 
+(Much material taken from Ch. 7 of Aggarwal's *Neural Networks and Deep Learning*.)
+
 'RNN' stands for Recurrent Neural Network. These networks are designed to deal with data in which there are sequential dependencies between the inputs. E.g., in a sentence, the order of words matters; there are relationships between the words that would be ignored by representing the sentence as a bag of words (compare 'the cat chased the mouse' with 'the mouse chased the cat'). 
 
 Once we abandon the bag-of-words approach to representing documents, we are faced with the difficulty that the inputs to our network have variable sizes. In an RNN, each position in the sequence of an input has an associated *time-stamp*. An RNN then contains a varying number of layers, and each layer has a single input corresponding to a distinct time-stamp. This allows the inputs to directly interact with down-stream hidden layers depending on their positions in the sequence. 
@@ -786,6 +788,12 @@ So, the network takes in a sequence of inputs and produces a sequence of outputs
 In the above example, there is both an input and output at each timestamp. However, it is possible for either the input or the output to be missing at any particular time-stamp. The choice of missing inputs and outputs depends on the specific application at hand. For example, in a time-series forecasting application, we might need outputs at each time-stamp in order to predict the next value in the time-series. On the other hand, in a sequence-classification application such as sentiment analysis, we might only need a single output label at the end of the sequence corresponding to its class. In general, it is possible for any subset of inputs or outputs to be missing in a particular application.
 
 Once the idea of a varying number of hidden layers is grasped, the key detail about RNNs is that the value of a node in a hidden layer h at a given timestamp t is a function of (a) that node's value at the previous timestamp t-1 (that is, the value of the node at that layer at timestamp t-1), and (b) the value of the node in the previous layer h-1 at timestamp t.
+
+Problems with RNNs:
+RNNs are very vulnerable to the exploding and vanishing gradient problems, because they can be very deep (depending on the number of inputs). This is aggravated by the sharing of weights by different "versions" of a hidden node across timestamps. That effectively means that the gradient is being multiplied by the same constant many times during backpropagation. If the constant is less than 1, the gradient will shrink; if it's greater than 1, the gradient will explode. 
+
+The combination of the vanishing/exploding gradient and the parameter tying across different layers causes the recurrent neural network to behave in an unstable way with gradient-descent step size. That is, the optimal points in the parameter spaces of recurrent networks are often hidden near cliffs or other regions of unpredictable change in the topography of the loss function, which causes the best directions of instantaneous movement to be extremely poor predictors of the best directions of finite movement. Since any practical learning algorithm is required to make finite steps of reasonable sizes to make good progress towards
+the optimal solution, this makes training rather hard. There have been several attempts to address this issue, including the introduction of LSTMs. 
 
 <br/>
 
