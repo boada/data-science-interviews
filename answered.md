@@ -745,7 +745,7 @@ If the learning rate is too large, you may miss (overshoot) a local minimum of t
 
 <br/>
 
-**How to set the learning rate? ‍⭐️**
+**How does one set the learning rate? ‍⭐️**
 
 This is a hyperparameter that can be tuned. Also, ideally the learning rate should be proportional to the magnitude of the gradient (and so, change as the magnitude of the gradient changes). That way you make finer adjustments as you get closer to the local minimum of the loss function. 
 
@@ -763,21 +763,52 @@ Answer here
 
 <br/>
 
-**Do we want to have a constant learning rate or we better change it throughout training? ‍⭐️**
+**Do we want to have a constant learning rate or is it better to change it throughout training? ‍⭐️**
 
 Ideally, the learning rate should be proportional to the magnitude of the gradient (and so, change as the magnitude of the gradient changes). That way you make finer adjustments as you get closer to the local minimum of the loss function.
 
 <br/>
 
-**When do you use which kind of neural network?**
+**What is an RNN? ‍⭐️**
 
-RNNs are typically used to be used when there's a time component. But they are not used as much anymore, especially in NLP. Now transformers are a significant competitor-- they are essentially CNNs with attention. 
+'RNN' stands for Recurrent Neural Network. These networks are designed to deal with data in which there are sequential dependencies between the inputs. E.g., in a sentence, the order of words matters; there are relationships between the words that would be ignored by representing the sentence as a bag of words (compare 'the cat chased the mouse' with 'the mouse chased the cat'). 
+
+Once we abandon the bag-of-words approach to representing documents, we are faced with the difficulty that the inputs to our network have variable sizes. In an RNN, each position in the sequence of an input has an associated *time-stamp*. An RNN then contains a varying number of layers, and each layer has a single input corresponding to a distinct time-stamp. This allows the inputs to directly interact with down-stream hidden layers depending on their positions in the sequence. 
+
+For example, suppose our task is to predict the next word of a sentence. Given the sentence 'The cat chased the mouse', we might have the following: 
+1. First, a network with one hidden layer, whose input is just the word 'the', and whose output is hoped to be 'cat'. 
+2. Then, a network with two hidden layers, whose input is 'The cat', and whose output is hoped to be 'chased'. 
+3. Then, a network with three hidden layers, whose input is 'The cat chased', and whose output is hoped to be 'the'. 
+4. Finally, a network with four hidden layers, whose input is 'The cat chased the', and whose output is (hoped to be) 'mouse'. 
+
+So, the network takes in a sequence of inputs and produces a sequence of outputs, changing its number of layers along the way. Each layer uses the same set of parameters to ensure similar modeling at each time stamp, and therefore the number of parameters is fixed throughout. 
+
+In the above example, there is both an input and output at each timestamp. However, it is possible for either the input or the output to be missing at any particular time-stamp. The choice of missing inputs and outputs depends on the specific application at hand. For example, in a time-series forecasting application, we might need outputs at each time-stamp in order to predict the next value in the time-series. On the other hand, in a sequence-classification application such as sentiment analysis, we might only need a single output label at the end of the sequence corresponding to its class. In general, it is possible for any subset of inputs or outputs to be missing in a particular application.
+
+Once the idea of a varying number of hidden layers is grasped, the key detail about RNNs is that the value of a node in a hidden layer h at a given timestamp t is a function of (a) that node's value at the previous timestamp t-1 (that is, the value of the node at that layer at timestamp t-1), and (b) the value of the node in the previous layer h-1 at timestamp t.
 
 <br/>
 
+
+
+**When do you use which kind of neural network?**
+
+RNNs are typically used to be used when there's a time or order component. (Another classic task is generating words in a sequence.) But simple RNNs are not used as much anymore, especially in NLP. Now transformers are a significant competitor-- they are essentially CNNs with attention. 
+
+RNNs, LSTMs, and GRUs -- NLP
+
+CNNs -- Image processing
+
+Transformers --
+
+Autoencoders --
+
+<br/>
+
+
 **What is attention?**
 
-In the context of words, attention is a weight matrix for each word, showing how much you need to pay attention to every other word in the sentence. In French we have articles that define gender. For an article you need to pay attention to a lot of the other words in the vicinity. RNNs are sequential, so as the sentence gets longer and longer you can get exploding or vanishing gradients, whereas attention doesn't get distored in that way since it runs in series rather than in parallel. 
+In the context of words, attention is a weight matrix for each word, showing how much you need to pay attention to every other word in the sentence. In French we have articles that define gender. For an article you need to pay attention to a lot of the other words in the vicinity. RNNs are sequential, so as the sentence gets longer and longer you can get exploding or vanishing gradients, whereas attention doesn't get distorted in that way since it runs in series rather than in parallel. 
 
 https://distill.pub/2016/augmented-rnns/
 
@@ -887,6 +918,9 @@ https://youtu.be/LHXXI4-IEns
 
 https://youtu.be/8HyCNIVRbSU
 
+
+
+
 <br/>
 
 **What is an autoencoder? ‍⭐️**
@@ -897,7 +931,7 @@ Decreasing numbers of neurons, and then re-increasing number of neurons, which i
 
 Google uses it when you download images from Google. 
 
-Variational auto encoder: in a regular encoder, in the middle there's avector that doesn;t change. In a variational auto-encoder, there;s a distribution rahter than a vector. You can sample the distribution and create things that didn't exist bnefore.,  The bottleneck is not a vector but rather a distributon. 
+Variational auto encoder: in a regular encoder, in the middle there's a vector that doesn't change. In a variational auto-encoder, there's a distribution rather than a vector. You can sample the distribution and create things that didn't exist before. The bottleneck is not a vector but rather a distributon. 
 
 At the bottleneck, each neuron has a set of values: the weights and biases, represented as a vector. But in variational autoencoders, the neurons in the squished layer instead vary within a given distribution(s). 
 
