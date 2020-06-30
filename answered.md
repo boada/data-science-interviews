@@ -170,7 +170,20 @@ Classification is labeling a set of observations into two or more categories. Yo
 
 **What is logistic regression? When do we need to use it? 👶**
 
-logistic regression is a linear model where the predicted value is either 0 or 1. See this: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+logistic regression is a linear-type model where the predicted value is either 0 or 1. See this: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+
+Logistic regression assumes that the predictors are linearly independent, and that for each response class and each data point, the log odds (log of the odds) that that data point falls in that class are a linear function of the predictor values for that data point. In the binary case, the odds are defined as: p(x) / ( 1 - p(x) ). 
+
+The loss function for logistic regression is:
+J(y-hat) = { -log(1 - y-hat), for y = 0
+	            -log(y-hat), for y = 1
+
+Note that:
+1. If y = 0 and y-hat is close to 0, J(y-hat) is small. 
+2. If y = 0 and y-hat is close to 1, J(y-hat) is large. 
+3. If y = 1 and y-hat is close to 0, J(y-hat) is large. 
+4. If y = 1 and y-hat is close to 1, J(y-hat) is small. 
+
 <br/>
 
 **Is logistic regression a linear model? Why? 👶**
@@ -187,11 +200,20 @@ z = w_1 * x_1 + w_2 * x_2
 ```
 There's no interaction between the parameter weights, nothing like w_1*x_1 * w_2* x_2 or so, which would make our model non-linear!
 
+
+It's not the same kind of linear model as you have in simple linear regression, though. Simple linear models assume that the response variable is a linear combination of the predictors. Logistic regression assumes that the *log of the odds of the response variable taking the positive class* is a linear combination of the predictors. (That is, log(p/(1-p)), where p is the probability that the value of the response variable is 1.) 
+
+
 <br/>
 
 **What is the sigmoid function? What does it do? 👶**
 
-Answer here
+A sigmoid function is a mathematical function having a characteristic "S"-shaped curve or sigmoid curve. A common example of a sigmoid function is the logistic function, defined by the formula
+
+$$\ S(x) = \frac 1{1}{1 + e^{-x}} $$
+
+
+The logistic function takes values between 0 and 1. In the context of logistic regression, this allows us to model the probability of a data point's value for the response variable being 1, assigning that probability a value between 0 and 1, as needed. 
 
 <br/>
 
@@ -545,13 +567,16 @@ Answer here
 
 **What is gradient boosting trees? ‍⭐️**
 
-Answer here
+Gradient boosting is an ensemble method for improving the performance of classification and regression trees. The regression case proceeds as follows. You start with a single leaf, whose value is the average of the response variable. Then you grow that to a tree of fixed depth (depth is a hyperparameter, controlling the amount of interaction between variables). Instead of trying to predict the response value, here you try to predict the error from the first tree (the single leaf). Then to predict the response value, add the predicted error (scaled by the learning rate) to the prediction from the first tree (the single leaf). Repeat this process, only now trying to predict the residuals of the second iteration. Continue until you have the pre-specified number of trees, or until adding additional trees doesn't decrease the residuals. (Note: in each iteration, you calculate the residuals by adding the predictions from all previous trees.)
 
 <br/>
 
 **What’s the difference between random forest and gradient boosting? ‍⭐️**
 
-Gradient boosted trees (GBT) differ from a random forest because in GBTs we are training one tree at a time, iteratively, one after another. In a random forest, we are using a random subset of the data and training all of the trees in parallel.
+Gradient boosted trees (GBT) differ from a random forest because in GBTs we are training one tree at a time, iteratively, one after another, and then aggregating the results. In a random forest, we are using a random subset of the data and training all of the trees in parallel.
+
+Note though: Both gradient boosting and Random Forest are ensemble methods: they involve combining the results of different trees. Also, like Random Forest, stochastic gradient boosting uses bagging. 
+
 <br/>
 
 **Is it possible to parallelize training of a gradient boosting model? How to do it? ‍⭐️**
@@ -562,7 +587,9 @@ Answer here
 
 **Feature importance in gradient boosting trees  —  what are possible options? ‍⭐️**
 
-Answer here
+I'm only aware of one option: the relative importance of a variable x is (the square root of) the sum of the squared improvements in squared error over all internal nodes for which it was chosen as the splitting variable. 
+
+(Here 'improvements' refers to improvements over the error associated with assigning a constant value over the entire region of the input space that is being split.)
 
 <br/>
 
@@ -579,13 +606,13 @@ The learning rate and the number of trees.
 
 **How do you approach tuning parameters in XGBoost or LightGBM? 🚀**
 
-Answer here
+Stochastic search or grid search. 
 
 <br/>
 
 **How do you select the number of trees in the gradient boosting model? ‍⭐️**
 
-Answer here
+It depends on the size of your dataset, but this is a hyperparameter that should be tuned using stochastic search or grid search. 
 
 <br/>
 
@@ -595,7 +622,7 @@ Answer here
 
 **Which parameter tuning strategies (in general) do you know? ‍⭐️**
 
-Grid and random search with cross validation.
+Grid and stochastic search with cross validation.
 <br/>
 
 **What’s the difference between grid search parameter tuning strategy and random search? When to use one or another? ‍⭐️**
