@@ -790,13 +790,12 @@ In the above example, there is both an input and output at each timestamp. Howev
 Once the idea of a varying number of hidden layers is grasped, the key detail about RNNs is that the value of a node in a hidden layer h at a given timestamp t is a function of (a) that node's value at the previous timestamp t-1 (that is, the value of the node at that layer at timestamp t-1), and (b) the value of the node in the previous layer h-1 at timestamp t.
 
 Problems with RNNs:
-RNNs are very vulnerable to the exploding and vanishing gradient problems, because they can be very deep (depending on the number of inputs). This is aggravated by the sharing of weights by different "versions" of a hidden node across timestamps. That effectively means that the gradient is being multiplied by the same constant many times during backpropagation. If the constant is less than 1, the gradient will shrink; if it's greater than 1, the gradient will explode. 
+RNNs are very vulnerable to the exploding and vanishing gradient problems, because they can be very deep (depending on the number of inputs). This is aggravated by the sharing of weights by different "versions" of a hidden node across timestamps. That effectively means that the gradient is being multiplied by the same weight matrix many times during backpropagation. Consider the simple case of a 1x1 matrix, a constant. If the constant is less than 1, the gradient will shrink; if it's greater than 1, the gradient will explode. 
 
 The combination of the vanishing/exploding gradient and the parameter tying across different layers causes the recurrent neural network to behave in an unstable way with gradient-descent step size. That is, the optimal points in the parameter spaces of recurrent networks are often hidden near cliffs or other regions of unpredictable change in the topography of the loss function, which causes the best directions of instantaneous movement to be extremely poor predictors of the best directions of finite movement. Since any practical learning algorithm is required to make finite steps of reasonable sizes to make good progress towards
 the optimal solution, this makes training rather hard. There have been several attempts to address this issue, including the introduction of LSTMs. 
 
 <br/>
-
 
 
 **When do you use which kind of neural network?**
@@ -926,7 +925,8 @@ https://youtu.be/LHXXI4-IEns
 
 https://youtu.be/8HyCNIVRbSU
 
-
+An LSTM (Long Short-Term Memory network) is a particular type of RNN, which is designed to solve the vanishing/exploding gradient problem. One way of viewing
+this problem is that a neural network that uses only multiplicative updates is good only at learning over short sequences, and is therefore inherently endowed with good short-term memory but poor long-term memory. Thus the LSTM introduces a kind of long-term memory. 
 
 
 <br/>
