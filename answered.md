@@ -1083,7 +1083,9 @@ Logistic regression makes the most sense when the predictors are numeric variabl
 
 **What are word embeddings? Why are they useful? Do you know Word2Vec? ‍⭐️**
 
-Answer here
+A word embedding is a mapping of words into a vector space of real numbers. Word embeddings are useful because they allow textual data to be processed and analyzed using algorithms that only accept numerical inputs. 
+
+Word2vec is a group of related models that are used to produce word embeddings. These models are two-layer neural networks that are trained to reconstruct linguistic contexts of words. Words are then represented as vectors in a vector space typically consisting of several hundred dimensions. 
 
 <br/>
 
