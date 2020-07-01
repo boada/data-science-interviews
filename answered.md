@@ -925,9 +925,32 @@ https://youtu.be/LHXXI4-IEns
 
 https://youtu.be/8HyCNIVRbSU
 
-An LSTM (Long Short-Term Memory network) is a particular type of RNN, which is designed to solve the vanishing/exploding gradient problem. One way of viewing
-this problem is that a neural network that uses only multiplicative updates is good only at learning over short sequences, and is therefore inherently endowed with good short-term memory but poor long-term memory. Thus the LSTM introduces a kind of long-term memory. 
+(Closely inspired by Aggarwal's *Neural Networks and Deep Learning*, Sec. 7.5)
 
+An LSTM (Long Short-Term Memory network) is a particular type of RNN, which is designed to solve the vanishing/exploding gradient problem. One way of viewing
+this problem is that a neural network that uses only multiplicative updates is good only at learning over short sequences, and is therefore inherently endowed with good short-term memory but poor long-term memory. In response, the LSTM introduces a kind of long-term memory. 
+
+In LSTMs, we change the way that hidden states are propagated. In addition to the hidden state vector **h_t^k** (whose dimension p reflects the way the embedding was done), there is another vector **c_t^k** called the *cell state*. (Here I use **boldface** for vectors) The cell state is a kind of long-term memory that retains at least a part of the information in earlier states by using a combination of partial “forgetting” and “increment” operations on the previous cell states. 
+
+These operations are accomplished via several extra elements:
+1. An input gate **i**
+2. A forget gate **f**
+3. An output gate **o**
+4. A new c-state **c** (distinct from **c_t^k**)
+
+When we update at a given timestamp t the state vector of a hidden neuron **h_(t-1)^k**, the motto is: "selectively forget and add to long-term memory, and then selectively leak long-term memory to the hidden state **h_t^k**". More precisely:
+
+First, as in all RNNs, updates to a hidden node **h_t^k** are partly determined by the values of the previous (less deep) node **h_t^(k-1)** and that node's value at the previous timestamp, **h_(t-1)^k**, scaled by the weights of the connections between those nodes and **h_t^k**. This gives us a vector of length 4p. We then apply the sigmoid function to the first 3p-many elements of that vector, and tanh to the final p-many elements. This defines the vectors **i**, **f**, **o** and **c**, respectively. We then update the cell state and hidden state vector as follows:
+
+
+**c_t^k** = **f** x **c_(t-1)^k** + **i** x **c**, where 'x' denotes elementwise vector multiplication. ("selectively forget and add to long-term memory")
+Observe: forgetting happens when we multiply **f** by **c_(t-1)^k**; adding to long-term memory happens when we multiply **i** by **c**. 
+
+Then we update **h_t^k**:
+**h_t^k** = **o** x tanh(**c_t^k**)   (selectively leak long-term memory to the hidden state **h_t^k**)
+Here "leaking long-term memory to **h_t^k**" happens because **h_t^k** is defined partly in terms of **c_t^k**, which represents long term memory. Of course, as usual, **h_t^k** is also influenced more directly by **h_(t-1)^k** and **h_t^(k-1)**, via the output term **o**. 
+
+As Aggarwal explains it, the reason that LSTMs avoid the vanishing gradient problems stems from the fact that by the definition of **c_t^k**, its partial derivative w.r.t. **c_(t-1)^k** is **f**. This means that backward gradient flows for **c_t^k** are multiplied by the value of **f**. If **f** is initialized with a high bias term, gradient flows will decay relatively slowly (getting multiplied by something that's close to 1). Moreover, **f** can take different values at different timestamps, which also mitigates the vanishing gradient problem. As Aggarwal puts it, "the long-term cell states function as gradient super-highways, which leak into hidden states" (via the definition of **h_t^k** partly in terms of **c_t^k**).
 
 <br/>
 
