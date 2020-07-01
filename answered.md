@@ -956,7 +956,7 @@ As Aggarwal explains it, the reason that LSTMs avoid the vanishing gradient prob
 
 **What is an autoencoder? ‍⭐️**
 
-You take a high information content Thing, like an image, and run it thought a bottleneck to reduce time and space requirements. It is like a non-linear dimensionality reduction method. 
+You take a high information content Thing, like an image, and run it through a bottleneck (a layer that has very few neurons) to reduce time and space requirements. It is like a non-linear dimensionality reduction method. 
 
 Decreasing numbers of neurons, and then re-increasing number of neurons, which is a decoder. 
 
