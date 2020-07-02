@@ -1289,7 +1289,7 @@ iii) For each topic i, assign the instance of w in document d the following prob
 iv) Repeat with randomly chosen other words until we've looked at all the words. 
 v) Repeat some given number of times, looping through the entire corpus. 
 
-* *\ *\ *\***
+**\*\*\***
 
 LDA models are evaluated via two measures, *perpexity* and *coherence score*. Perplexity is a standard measure of performance for statistical models  of  natural  language. It measures the uncertainty in predicting a single word; lower values are better, and chance performance results in a perplexity equal to the size of the vocabulary. 
 
