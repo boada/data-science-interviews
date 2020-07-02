@@ -1121,6 +1121,8 @@ Word2vec is a group of related models that are used to produce word embeddings. 
 
 Word2vec learns the position of a word in the vector space by considering how it relates to other words that neighbor it in the corpus. That can be done in one of two ways, either using context to predict a target word (a method known as continuous bag of words, or CBOW), or using a word to predict a target context, which is called skip-gram. Using skip-gram, for example, when the feature vector assigned to a word cannot be used to accurately predict that word’s context, the components of the vector are adjusted. Each word’s context in the corpus is the "teacher" sending error signals back to adjust the feature vector. The vectors of words that are judged similar by their context are nudged closer together by adjusting the numerical entries in the vector.
 
+[Here](https://pathmind.com/wiki/word2vec) is a good resource on word2vec.
+
 <br/>
 
 **Do you know any other ways to get word embeddings? 🚀**
