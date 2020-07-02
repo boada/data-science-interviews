@@ -798,13 +798,22 @@ the optimal solution, this makes training rather hard. There have been several a
 <br/>
 
 
+**What is the motivation for bi-directional RNNs and how do they work?**
+In some applications, especially speech recognition, handwriting recognition, and sentence completion, performance can be greatly improved by allowing the RNN to look at elements *later* in the sequence than the one it is trying to predict or classify. In other words, to it can help greatly to consider the context both prior and posterior to a given word or character. Bi-directional RNNs allow for this, by letting the hidden neurons read the input from back to front as well as from front to back as "time" progresses. 
+
+As for the architecture, in a bi-directional RNN, each hidden node has not just one state vector but two: a forward state vector **h_t^f^k** and a backward state vector **h_t^b^k**. (Here as usual the superscript k indicates the depth of the node.) During forward propagation, the forward state vector **h_t^f^k** is updated by **h_(t-1)^f^k** and **h_t^f^(k-1)**, scaled by forward-facing weight matrices, summed, and run through tanh, whereas the backward state vector **h_t^b^k** is updated by **h_(t+1)^b^k** and **h_t^b^(k-1)**, scaled by backward-facing weight matrices, summed, and run through tanh. The forward-facing and backward-facing hidden state vectors do not interact directly at all; they are only connected in that they receive the same input (though in reverse orders) and the output of the network aggregates the forward and backward activation levels of the final layer-- so, during backpropagation, the loss is calculated from both the forward- and backward-looking processes. 
+
+One final point. Let the length of the input sequence be N. Then, during backpropagation, the forward-facing weight matrices are trained on the input sequence from t = N to t = 1, whereas the backward-facing weight matrices are trained on the sequence from t = 1 to t = N. 
+
+<br/>
+
 **When do you use which kind of neural network?**
 
 RNNs are typically used to be used when there's a time or order component. (Another classic task is generating words in a sequence.) But simple RNNs are not used as much anymore, especially in NLP. Now transformers are a significant competitor-- they are essentially CNNs with attention. 
 
 RNNs, LSTMs, and GRUs -- NLP
 
-CNNs -- Image processing
+CNNs -- Image processing, some NLP tasks
 
 Transformers --
 
