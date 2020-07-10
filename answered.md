@@ -587,9 +587,12 @@ Answer here
 
 **Feature importance in gradient boosting trees  —  what are possible options? ‍⭐️**
 
-I'm only aware of one option: the relative importance of a variable x is (the square root of) the sum of the squared improvements in squared error over all internal nodes for which it was chosen as the splitting variable. 
+Gain - the average improvement in node purity of splits which use the feature. More specifically: the relative importance of a variable x is (the square root of) the sum of the squared improvements in squared error over all internal nodes for which it was chosen as the splitting variable. (Here 'improvements' refers to improvements over the error associated with assigning a constant value over the entire region of the input space that is being split.)
 
-(Here 'improvements' refers to improvements over the error associated with assigning a constant value over the entire region of the input space that is being split.)
+Weight -  the number of times a feature appears in a tree (the number of nodes for which the tree splits using that feature)
+
+Coverage - the average coverage of splits which use the feature, where coverage is defined as the number of samples affected by the split
+
 
 <br/>
 
