@@ -513,7 +513,8 @@ See [this](https://towardsdatascience.com/the-mathematics-of-decision-trees-rand
 
 **What is random forest? 👶**
 
-An ensemble method that uses a collection of decision trees to solve the regression or classification problem.
+An ensemble method that uses a collection of decision trees to solve the regression or classification problem. You train a large number of weak learners (short trees) on different (among them) samples of the data (Bootstrap AGGregation, or 'bagging'), allowing each node access to a randomly chosen proper subset of features while training (feature bagging). You then aggregate the results given by the different trees. E.g., if more than half of the trees classify data point x in response category 0, then the final model classifies it in response category 0. 
+
 <br/>
 
 **Why do we need randomization in random forest? ‍⭐️**
@@ -523,18 +524,23 @@ Training on a random subset of the data helps to prevent overfitting.
 
 **What are the main parameters of the random forest model? ‍⭐️**
 
-Number of trees, depth, etc.
+Number of trees, tree depth, number of observations in each leaf, how node purity is measured, etc.
+
 <br/>
 
 **How do we select the depth of the trees in random forest? ‍⭐️**
 
-Answer here
+Greater tree depth allows you to model more interactions between features, but carries a slightly higher computational cost. Ultimately this is a hyperparameter that should be tuned. 
 
 <br/>
 
 **How do we know how many trees we need in random forest? ‍⭐️**
 
-Answer here
+Ultimately this is another hyperparameter to tune, but standard settings are robust. (See [here](https://stats.stackexchange.com/questions/36165/does-the-optimal-number-of-trees-in-a-random-forest-depend-on-the-number-of-pred/36183) for further explanation.)
+
+If the number of observations is large, but the number of trees is too small, then some observations will be predicted only once or even not at all. If the number of predictors is large but the number of trees is too small, then some features can (theoretically) be missed in all subspaces used. Both cases results in the decrease of random forest predictive power. But the last is a rather extreme case, since the selection of feature subspace is performed at each node.
+
+During classification the feature subspace dimensionality is sqrt(p) (rather small, p is the total number of predictors) by default, but a tree contains many nodes, so there are many opportunities for a feature to be chosen for splitting on. During regression the subspace dimensionality is p/3 (large enough) by default, though a tree contains fewer nodes. So the optimal number of trees in a random forest depends on the number of predictors only in extreme cases. 
 
 <br/>
 
@@ -546,7 +552,7 @@ Answer here
 
 **What are the potential problems with many large trees? ‍⭐️**
 
-Answer here
+Computational cost and overfitting. 
 
 <br/>
 
@@ -558,7 +564,7 @@ Answer here
 
 **What happens when we have correlated features in our data? ‍⭐️**
 
-Answer here
+Like other tree-based methods, random forest is robust to correlated features. The algorithm will still find the best features to split on in each training iteration. 
 
 <br/>
 
