@@ -219,7 +219,7 @@ It's not the same kind of linear model as you have in simple linear regression, 
 
 A sigmoid function is a mathematical function having a characteristic "S"-shaped curve or sigmoid curve. A common example of a sigmoid function is the logistic function, defined by the formula
 
-$$\ S(x) = \frac 1{1}{1 + e^{-x}} $$
+$$\ S(x) = \frac{1}{1 + e^{-x}} $$
 
 
 The logistic function takes values between 0 and 1. In the context of logistic regression, this allows us to model the probability of a data point's value for the response variable being 1, assigning that probability a value between 0 and 1, as needed. 
