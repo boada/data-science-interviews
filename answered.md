@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # Theoretical interview questions
 
 * The list of questions is based on this post: https://hackernoon.com/160-data-science-interview-questions-415s3y2a
@@ -764,7 +769,7 @@ Then the network will not provide any outputs. If this is done before training, 
 **What regularization techniques for neural nets do you know? 
 ⭐️**
 
-Dropout. 
+Dropout. Increasing stride size (for convolutional networks-- stride of 2 is the max in normal settings).
 
 <br/>
 
@@ -963,14 +968,29 @@ Answer here
 **How we can use neural nets for computer vision? 
 ⭐️**
 
-Answer here
+Convolutional neural networks are the most common tool. These networks are designed to deal well with data that has a grid-structure, where points in the same cells of the grid tend to have similar values.  They are thus well-positioned to deal with image data, since images have this property: nearby pixels tend to have similar colors. 
 
 <br/>
 
 **What’s a convolutional layer? 
 ⭐️**
 
-Answer here
+A convolutional layer is a layer of a neural network that uses a *convolution operation*. A convolution operation is a dot-product operation between a grid-structured set of weights and similar grid-structured inputs drawn from different spatial localities in the input volume. This type of operation is useful for data with a high level of spatial or other locality, such as image data. 
+
+
+**Describe the architecture of a CNN and how it works. 
+⭐️**
+
+In convolutional neural networks, the states in each layer are arranged according to a spatial grid structure. These spatial relationships are inherited from one layer to the next because each feature value is based on a small local spatial region in the previous layer. The value of a feature in a particular layer is connected only to a local spatial region in the previous layer, with a consistent set of shared parameters across the full spatial footprint of the image.
+
+Each layer in the convolutional network is a 3-dimensional grid structure, which has a height, width, and depth. The depth of a layer in a convolutional neural network should not be confused with the depth of the network itself. The word “depth” (when used in the context of a single layer) refers to the number of channels in each layer, such as the number of primary color channels (e.g., blue, green, and red) in the input image or the number of feature maps in the hidden layers.
+  
+The convolutional neural network functions much like a traditional feed-forward neural network, except that the operations in its layers are spatially organized with sparse (and carefully designed) connections between layers. The three types of layers that are commonly present in a convolutional neural network are convolution, pooling, and ReLU. The ReLU activation is no different from a traditional neural network. In addition, a final set of layers is often fully connected and maps in an application-specific way to a set of output nodes.
+
+The input data to the convolutional neural network is organized into a 2-dimensional grid structure, and the values of the individual grid points are referred to as pixels. Each pixel, therefore, corresponds to a spatial location within the image. However, in order to encode the precise color of the pixel, we need a multidimensional array of values at each grid location. In the RGB color scheme, we have an intensity of the three primary colors, corresponding to red, green, and blue, respectively. Therefore, if the spatial dimensions of an image are 32×32 pixels and the depth is 3 (corresponding to the RGB color channels), then the overall
+number of pixels in the image is 32 × 32 × 3.
+
+*To be continued...*
 
 <br/>
 
